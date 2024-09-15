@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>URL Encoder</title>
+    <title>URL Encoder/Decoder</title>
     <script>
         // Function to encode the URL by adding 1000 to each character's ASCII code
         function encodeUrl(url) {
@@ -18,13 +18,38 @@
             return encoded;
         }
 
-        // Function to handle form submission and encoding
+        // Function to decode the URL by subtracting 1000 from each set of 4 digits
+        function decodeUrl(encoded) {
+            let decoded = '';
+
+            // Loop through the encoded string in steps of 4 characters
+            for (let i = 0; i < encoded.length; i += 4) {
+                // Extract a set of 4 digits and convert it back to a character
+                let encodedChar = parseInt(encoded.substring(i, i + 4)) - 1000;
+
+                // Convert the character code back to a character and append to the decoded string
+                decoded += String.fromCharCode(encodedChar);
+            }
+
+            return decoded;
+        }
+
+        // Function to handle encoding
         function handleEncode() {
             const url = document.getElementById("url").value;
             const encodedUrl = encodeUrl(url);
 
             // Display the encoded URL in the output field
             document.getElementById("encodedUrl").value = encodedUrl;
+        }
+
+        // Function to handle decoding
+        function handleDecode() {
+            const encoded = document.getElementById("encodedUrl").value;
+            const decodedUrl = decodeUrl(encoded);
+
+            // Display the decoded URL in the output field
+            document.getElementById("url").value = decodedUrl;
         }
 
         // Function to copy the encoded URL to the clipboard
@@ -46,13 +71,14 @@
 </head>
 <body>
 
-<h2>URL Encoder</h2>
+<h2>URL Encoder/Decoder</h2>
 
 <!-- Form for URL input -->
 <form onsubmit="event.preventDefault(); handleEncode();">
     <label for="url">Enter URL:</label><br>
-    <input type="text" id="url" placeholder"Input Url" style="width: 400px;"><br><br>
+    <input type="text" id="url" value="https://wqx--pencil--ktx.1688ay.com:2053" style="width: 400px;"><br><br>
     <input type="submit" value="Encode URL">
+    <button type="button" onclick="handleDecode()">Decode URL</button>
     <button type="button" onclick="resetFields()">Reset</button>
 </form>
 
