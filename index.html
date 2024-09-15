@@ -48,7 +48,7 @@
             const encoded = document.getElementById("encodedUrl").value;
             const decodedUrl = decodeUrl(encoded);
 
-            // Display the decoded URL in the output field
+            // Display the decoded URL in the input field
             document.getElementById("url").value = decodedUrl;
         }
 
@@ -76,7 +76,7 @@
 <!-- Form for URL input -->
 <form onsubmit="event.preventDefault(); handleEncode();">
     <label for="url">Enter URL:</label><br>
-    <input type="text" id="url" placeholder="Input Url" style="width: 400px;"><br><br>
+    <input type="text" id="url" value="https://wqx--pencil--ktx.1688ay.com:2053" style="width: 400px;"><br><br>
     <input type="submit" value="Encode URL">
     <button type="button" onclick="handleDecode()">Decode URL</button>
     <button type="button" onclick="resetFields()">Reset</button>
@@ -86,7 +86,7 @@
 
 <!-- Encoded URL output and copy button -->
 <label for="encodedUrl">Encoded URL:</label><br>
-<input type="text" id="encodedUrl" style="width: 400px;" readonly><br><br>
+<input type="text" id="encodedUrl" style="width: 400px;"><br><br>
 <button type="button" onclick="copyToClipboard()">Copy Encoded URL</button>
 
 </body>
