@@ -19,14 +19,11 @@
         .container {
             width: 90%;
             max-width: 800px;
-            min-height: 100vh; /* Ensure container height covers viewport height */
+            margin: 20px;
             padding: 20px;
             background: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Center contents vertically */
         }
 
         h2 {
@@ -93,20 +90,24 @@
         // Function to encode the URL by adding 1000 to each character's ASCII code
         function encodeUrl(url) {
             let encoded = '';
+
             for (let i = 0; i < url.length; i++) {
                 let encodedChar = url.charCodeAt(i) + 1000;
                 encoded += encodedChar;
             }
+
             return encoded;
         }
 
         // Function to decode the URL by subtracting 1000 from each set of 4 digits
         function decodeUrl(encoded) {
             let decoded = '';
+
             for (let i = 0; i < encoded.length; i += 4) {
                 let encodedChar = parseInt(encoded.substring(i, i + 4)) - 1000;
                 decoded += String.fromCharCode(encodedChar);
             }
+
             return decoded;
         }
 
