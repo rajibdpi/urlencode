@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Encoder</title>
+    <script>
+        // Function to encode the URL by adding 1000 to each character's ASCII code
+        function encodeUrl(url) {
+            let encoded = '';
+
+            for (let i = 0; i < url.length; i++) {
+                // Get the ASCII code of each character and add 1000
+                let encodedChar = url.charCodeAt(i) + 1000;
+
+                // Append the encoded character (as a string) to the encoded URL
+                encoded += encodedChar;
+            }
+
+            return encoded;
+        }
+
+        // Function to handle form submission and encoding
+        function handleEncode() {
+            const url = document.getElementById("url").value;
+            const encodedUrl = encodeUrl(url);
+
+            // Display the encoded URL in the output field
+            document.getElementById("encodedUrl").value = encodedUrl;
+        }
+
+        // Function to copy the encoded URL to the clipboard
+        function copyToClipboard() {
+            const encodedText = document.getElementById("encodedUrl").value;
+            navigator.clipboard.writeText(encodedText).then(() => {
+                alert("Encoded URL copied to clipboard!");
+            }).catch(err => {
+                alert("Failed to copy: " + err);
+            });
+        }
+
+        // Function to reset the input and output fields
+        function resetFields() {
+            document.getElementById("url").value = "";
+            document.getElementById("encodedUrl").value = "";
+        }
+    </script>
+</head>
+<body>
+
+<h2>URL Encoder</h2>
+
+<!-- Form for URL input -->
+<form onsubmit="event.preventDefault(); handleEncode();">
+    <label for="url">Enter URL:</label><br>
+    <input type="text" id="url" value="https://wqx--pencil--ktx.1688ay.com:2053" style="width: 400px;"><br><br>
+    <input type="submit" value="Encode URL">
+    <button type="button" onclick="resetFields()">Reset</button>
+</form>
+
+<br>
+
+<!-- Encoded URL output and copy button -->
+<label for="encodedUrl">Encoded URL:</label><br>
+<input type="text" id="encodedUrl" style="width: 400px;" readonly><br><br>
+<button type="button" onclick="copyToClipboard()">Copy Encoded URL</button>
+
+</body>
+</html>
