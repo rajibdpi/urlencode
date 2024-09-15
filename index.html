@@ -1,17 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Encoder/Decoder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"],
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #6c757d;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:hover {
+            background-color: #5a6268;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 600px) {
+
+            input[type="text"],
+            input[type="submit"],
+            button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
     <script>
         // Function to encode the URL by adding 1000 to each character's ASCII code
         function encodeUrl(url) {
             let encoded = '';
 
             for (let i = 0; i < url.length; i++) {
-                // Get the ASCII code of each character and add 1000
                 let encodedChar = url.charCodeAt(i) + 1000;
-
-                // Append the encoded character (as a string) to the encoded URL
                 encoded += encodedChar;
             }
 
@@ -22,12 +94,8 @@
         function decodeUrl(encoded) {
             let decoded = '';
 
-            // Loop through the encoded string in steps of 4 characters
             for (let i = 0; i < encoded.length; i += 4) {
-                // Extract a set of 4 digits and convert it back to a character
                 let encodedChar = parseInt(encoded.substring(i, i + 4)) - 1000;
-
-                // Convert the character code back to a character and append to the decoded string
                 decoded += String.fromCharCode(encodedChar);
             }
 
@@ -38,8 +106,6 @@
         function handleEncode() {
             const url = document.getElementById("url").value;
             const encodedUrl = encodeUrl(url);
-
-            // Display the encoded URL in the output field
             document.getElementById("encodedUrl").value = encodedUrl;
         }
 
@@ -47,8 +113,6 @@
         function handleDecode() {
             const encoded = document.getElementById("encodedUrl").value;
             const decodedUrl = decodeUrl(encoded);
-
-            // Display the decoded URL in the input field
             document.getElementById("url").value = decodedUrl;
         }
 
@@ -69,25 +133,29 @@
         }
     </script>
 </head>
+
 <body>
 
-<h2>URL Encoder/Decoder</h2>
+    <div class="container">
+        <h2>URL Encoder/Decoder</h2>
 
-<!-- Form for URL input -->
-<form onsubmit="event.preventDefault(); handleEncode();">
-    <label for="url">Enter URL:</label><br>
-    <input type="text" id="url" placeholder="Input Url" style="width: 400px;"><br><br>
-    <input type="submit" value="Encode URL">
-    <button type="button" onclick="handleDecode()">Decode URL</button>
-    <button type="button" onclick="resetFields()">Reset</button>
-</form>
+        <!-- Form for URL input -->
+        <form onsubmit="event.preventDefault(); handleEncode();">
+            <label for="url">Enter URL:</label><br>
+            <input type="text" id="url" placeholder="Input Url"><br>
+            <input type="submit" value="Encode URL">
+            <button type="button" onclick="handleDecode()">Decode URL</button>
+            <button type="button" onclick="resetFields()">Reset</button>
+        </form>
 
-<br>
+        <br>
 
-<!-- Encoded URL output and copy button -->
-<label for="encodedUrl">Encoded URL:</label><br>
-<input type="text" id="encodedUrl" style="width: 400px;"><br><br>
-<button type="button" onclick="copyToClipboard()">Copy Encoded URL</button>
+        <!-- Encoded URL output and copy button -->
+        <label for="encodedUrl">Encoded URL:</label><br>
+        <input type="text" id="encodedUrl"><br>
+        <button type="button" onclick="copyToClipboard()">Copy Encoded URL</button>
+    </div>
 
 </body>
+
 </html>
